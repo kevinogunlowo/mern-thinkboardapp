@@ -1,6 +1,7 @@
 import express from "express"
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 
 import noteRoutes from "./routes/noteRoutes.js";
 import { connectDB } from "./config/db.js";
@@ -12,10 +13,18 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5004
+const __dirname = path.resolve()
 
 
 
 //Middleware
+if(process.env.NODE_ENV !== "production"){
+    app.use(
+        cors({
+            origin:"http://localhost:5173",
+        })
+    );
+}
 app.use(cors(
     {origin: "http://localhost:5173",}
 ));
@@ -28,6 +37,13 @@ app.use(rateLimiter);
 // });
 
 app.use("/api/notes", noteRoutes);
+if (process.env.NODE_ENV === "production"){
+    app.use(express.static(path.join(__dirname, "../frontend/thinkboard")))
+
+app.get("*", (req,res) => {
+    res.sendFile(path.join(__dirname,"../frontend", "thinkboard", "index.html"))
+});
+}
 connectDB().then(() => {
     app.listen(PORT, () => {
         console.log("Server started on PORT:", PORT);

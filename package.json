@@ -1,0 +1,21 @@
+{
+  "name": "mern-thinkboard-app",
+  "version": "1.0.0",
+  "description": "A sleek and responsive note-taking app built with the MERN stack, enabling seamless CRUD operations and real-time interaction with notes through a clean UI.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinogunlowo/mern-thinkboardapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinogunlowo/mern-thinkboardapp/issues"
+  },
+  "homepage": "https://github.com/kevinogunlowo/mern-thinkboardapp#readme"
+}
